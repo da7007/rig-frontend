@@ -9,13 +9,13 @@ export default createRouter({
       name: "App",
       path: "/",
       component: App,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
       name: "Account",
       path: "/account",
       component: AccountHome,
-      meta: { requiresAuth: false }
-    }
+      meta: { guest: true },
+    },
   ],
 });

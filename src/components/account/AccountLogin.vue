@@ -7,15 +7,17 @@
         id="username"
         type="text"
         class="form-control"
-        placeholder="Email/Username"
+        placeholder="Email Address"
+        v-model="email"
       />
       <input
         id="password"
         type="password"
         class="form-control"
         placeholder="Password"
+        v-model="password"
       />
-      <button class="btn btn-dark rounded" @click="login()" id="login">
+      <button class="btn btn-dark rounded" @click="login(email, password)" id="login">
         Login
       </button>
       <button class="btn btn-dark rounded" id="forgot-password">
@@ -28,17 +30,38 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import auth from "@/auth/auth";
 
 export default defineComponent({
   name: "AccountLogin",
   data() {
     return {
-      isAuthenticated: false,
-    };
+      email: "" as string,
+      password: "" as string
+    }
   },
   methods: {
-    login() {
-      axios.get("http://localhost:3000/login");
+    async login(email: string, password: string) {
+      interface LoginRequest {
+        email_address: string;
+        password: string;
+      }
+
+      const request: LoginRequest = {
+        email_address: email,
+        password: password
+      };
+
+      await axios
+        .post("http://localhost:3000/login", null, { params: request })
+        .then((response) => {
+          if (response.status === 200) {
+            auth.setAuth.loggedIn = true;
+            this.$router.push("/");
+          } else {
+            auth.setAuth.loggedIn = false;
+          }
+        });
     },
   },
 });
