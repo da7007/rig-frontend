@@ -3,33 +3,38 @@
         <div id="account-home-content">
             <h3>Welcome to Rig</h3>
             <p>Please login below to get started.</p>
-            <button class="btn btn-dark rounded">Sign up</button>
+            <button v-if="!isNewUser" @click="isNewUser=true" class="btn btn-dark rounded">Sign up</button>
+            <button v-if="isNewUser" @click="isNewUser=false" class="btn btn-dark rounded">Log In</button>
 
-            <AccountLogin />
+            <AccountLogin v-if="!isNewUser"/>
+            <AccountRegister v-if="isNewUser"/>
         </div>
-        
     </div>
-  
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import AccountLogin from "./AccountLogin.vue";
+import AccountRegister from "./AccountRegister.vue";
 
 export default defineComponent({
   name: "AccountHome",
+  data() {
+    return {
+        isNewUser: false
+    }
+  },
   components: {
-    AccountLogin
-  }
+    AccountLogin,
+    AccountRegister
+}
 });
 </script>
 
 <style scoped>
 #account-home {
     position:fixed;
-    left:10%;
-    width:80%;
-    right:10%;
+    width:100%;
     height: 100%;
     background-color:black;
     border-radius:0%;

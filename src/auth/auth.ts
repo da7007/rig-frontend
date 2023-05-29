@@ -13,6 +13,7 @@ const setAuth: setter = {
 const getAuth: getter = {
     isAuthenticated: () => !!setAuth.loggedIn
 }
+
 export default {
     setAuth,
     getAuth

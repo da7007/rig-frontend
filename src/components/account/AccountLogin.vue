@@ -2,27 +2,10 @@
   <div id="account-login">
     <div id="account-login-content">
       <h5>Login with your Rig ID</h5>
-
-      <input
-        id="username"
-        type="text"
-        class="form-control"
-        placeholder="Email Address"
-        v-model="email"
-      />
-      <input
-        id="password"
-        type="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="password"
-      />
-      <button class="btn btn-dark rounded" @click="login(email, password)" id="login">
-        Login
-      </button>
-      <button class="btn btn-dark rounded" id="forgot-password">
-        Password Reset
-      </button>
+      <input id="username" type="text" class="form-control" placeholder="Email Address" v-model="email" />
+      <input id="password" type="password" class="form-control" placeholder="Password" v-model="password" />
+      <button class="btn btn-dark rounded" @click="login(email, password)" id="login">Login</button>
+      <button class="btn btn-dark rounded" id="forgot-password">Password Reset</button>
     </div>
   </div>
 </template>
@@ -37,8 +20,8 @@ export default defineComponent({
   data() {
     return {
       email: "" as string,
-      password: "" as string
-    }
+      password: "" as string,
+    };
   },
   methods: {
     async login(email: string, password: string) {
@@ -49,7 +32,7 @@ export default defineComponent({
 
       const request: LoginRequest = {
         email_address: email,
-        password: password
+        password: password,
       };
 
       await axios
@@ -87,6 +70,7 @@ export default defineComponent({
   top: 200px;
   text-align: center;
 }
+
 #username {
   position: fixed;
   text-align: center;
@@ -95,6 +79,7 @@ export default defineComponent({
   width: 20%;
   right: 40%;
 }
+
 #password {
   position: fixed;
   text-align: center;
@@ -103,22 +88,22 @@ export default defineComponent({
   width: 20%;
   right: 40%;
 }
+
 #login {
   position: fixed;
   text-align: center;
   top: 350px;
   left: 40%;
-  width: 10%;
-  right: 40%;
-  margin: 1px;
+  width: 9.75%;
+  right:50.25%;
 }
+
 #forgot-password {
   position: fixed;
   text-align: center;
   top: 350px;
-  left: 50%;
-  width: 10%;
+  width: 9.75%;
+  left: 50.25%;
   right: 40%;
-  margin: 1px;
 }
 </style>
